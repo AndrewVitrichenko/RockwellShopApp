@@ -1,5 +1,11 @@
 package com.rockwellstudios.rockwellshop.model;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Andrew on 18.06.2017.
  */
@@ -15,7 +21,13 @@ public class Transaction {
     private long transactionDate;
     private long modifiedDate;
 
-    public Transaction(){
+    // this property cannot be persisted
+    private List<LineItem> lineItems;
+
+    // but this will
+    private String jsonLineItems;
+
+    public Transaction() {
 
     }
 
@@ -89,5 +101,26 @@ public class Transaction {
 
     public void setModifiedDate(long modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public List<LineItem> getLineItems() {
+        Gson gson = new Gson();
+        List<LineItem> result = gson.fromJson(getJsonLineItems(), new TypeToken<ArrayList<LineItem>>() {
+        }.getType());
+        return lineItems;
+    }
+
+    public void setLineItems(List<LineItem> lineItems) {
+        Gson gson = new Gson();
+        String jsonItems = gson.toJson(lineItems);
+        this.setJsonLineItems(jsonItems);
+    }
+
+    public String getJsonLineItems() {
+        return jsonLineItems;
+    }
+
+    public void setJsonLineItems(String jsonLineItems) {
+        this.jsonLineItems = jsonLineItems;
     }
 }

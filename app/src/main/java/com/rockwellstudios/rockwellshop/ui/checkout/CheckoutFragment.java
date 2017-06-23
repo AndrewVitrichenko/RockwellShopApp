@@ -1,4 +1,4 @@
-package com.rockwellstudios.rockwellshop.ui.addproduct;
+package com.rockwellstudios.rockwellshop.ui.checkout;
 
 
 import android.os.Bundle;
@@ -15,12 +15,12 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddProductDialogFragment extends BaseFragment {
+public class CheckoutFragment extends BaseFragment {
 
     private View mRootView;
 
 
-    public AddProductDialogFragment() {
+    public CheckoutFragment() {
         // Required empty public constructor
     }
 
@@ -29,8 +29,8 @@ public class AddProductDialogFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mRootView = inflater.inflate(R.layout.fragment_add_product_dialog, container, false);
-        unbinder = ButterKnife.bind(this, mRootView);
+        mRootView = inflater.inflate(R.layout.fragment_checkout, container, false);
+        unbinder = ButterKnife.bind(this,mRootView);
         return mRootView;
     }
 

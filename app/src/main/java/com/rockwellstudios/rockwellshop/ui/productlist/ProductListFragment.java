@@ -8,11 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rockwellstudios.rockwellshop.R;
+import com.rockwellstudios.rockwellshop.ui.BaseFragment;
+
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProductListFragment extends Fragment {
+public class ProductListFragment extends BaseFragment {
+
+    private View mRootView;
 
 
     public ProductListFragment() {
@@ -23,8 +28,9 @@ public class ProductListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_list, container, false);
+        mRootView = inflater.inflate(R.layout.fragment_product_list, container, false);
+        unbinder = ButterKnife.bind(this, mRootView);
+        return mRootView;
     }
 
 }

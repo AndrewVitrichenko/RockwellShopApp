@@ -8,23 +8,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rockwellstudios.rockwellshop.R;
+import com.rockwellstudios.rockwellshop.ui.BaseFragment;
+
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CustomerListFragment extends Fragment {
+public class CustomerListFragment extends BaseFragment {
 
+    private View mRootView;
 
     public CustomerListFragment() {
-        // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_list, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mRootView = inflater.inflate(R.layout.fragment_customer_list, container, false);
+        unbinder = ButterKnife.bind(this, mRootView);
+        return mRootView;
     }
 
 }
