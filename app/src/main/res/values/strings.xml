@@ -14,4 +14,7 @@
     <string name="label_paypal">PayPal</string>
     <string name="label_clear">Clear</string>
     <string name="label_checkout">Checkout</string>
+    <string name="label_category">Category</string>
+    <string name="label_qty">qty</string>
+    <string name="label_delete">Delete</string>
 </resources>
