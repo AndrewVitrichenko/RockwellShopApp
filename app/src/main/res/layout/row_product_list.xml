@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="@dimen/margin_padding_small">
 
     <LinearLayout
@@ -17,18 +17,19 @@
             android:id="@+id/textview_product_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:textAllCaps="true"
             android:textColor="@color/primary_text"
-            android:textSize="@dimen/text_size_normal"/>
+            android:textSize="@dimen/text_size_normal" />
 
         <TextView
             android:id="@+id/textview_product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_small"
             android:maxLines="1"
-            android:layout_marginTop="8dp"
             android:textColor="@color/secondary_text"
-            android:textSize="@dimen/text_size_xnormal"/>
+            android:textSize="@dimen/text_size_xnormal" />
 
     </LinearLayout>
 
@@ -51,40 +52,42 @@
             android:id="@+id/textview_product_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_margin="@dimen/margin_padding_small"
             android:background="@android:color/transparent"
             android:text="$20.00"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_huge"/>
+            android:textSize="@dimen/text_size_huge" />
 
         <ImageView
             android:id="@+id/image_view_add_to_cart_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_weight="0"
-            app:srcCompat="@drawable/ic_shopping_cart"
+            android:layout_margin="@dimen/margin_padding_small"
+            android:minHeight="@dimen/margin_padding_xlarge"
+            android:minWidth="@dimen/margin_large"
+            android:padding="@dimen/margin_padding_small"
             android:scaleType="center"
-            android:minHeight="36dp"
-            android:minWidth="64dp"
-            android:padding="8dp"
-            android:layout_margin="8dp"/>
+            app:srcCompat="@drawable/ic_shopping_cart" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:orientation="vertical"
             android:layout_alignBottom="@+id/image_view_add_to_cart_button"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_toLeftOf="@+id/textview_product_price"
-            android:layout_toStartOf="@+id/textview_product_price">
+            android:layout_toStartOf="@+id/textview_product_price"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/margin_padding_small"
+            android:paddingLeft="@dimen/margin_padding_xsmall"
+            android:paddingRight="@dimen/margin_padding_xsmall"
+            android:paddingTop="@dimen/margin_padding_small">
 
             <TextView
                 android:id="@+id/textview_product_description"
@@ -94,8 +97,8 @@
                 android:maxLines="2"
                 android:text=""
                 android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
