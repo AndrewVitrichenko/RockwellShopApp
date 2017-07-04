@@ -94,13 +94,13 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         @Override
         public void onClick(View view) {
-            Product selectedProduct = mProducts.get(getAdapterPosition());
+            Product selectedProduct = mProducts.get(getLayoutPosition());
             mListener.onSelectProduct(selectedProduct);
         }
 
         @Override
         public boolean onLongClick(View view) {
-            Product selectedProduct = mProducts.get(getAdapterPosition());
+            Product selectedProduct = mProducts.get(getLayoutPosition());
             mListener.onLongClickProduct(selectedProduct);
             return true;
         }

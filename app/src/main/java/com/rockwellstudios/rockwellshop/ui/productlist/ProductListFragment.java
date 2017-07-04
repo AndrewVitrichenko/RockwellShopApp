@@ -2,35 +2,72 @@ package com.rockwellstudios.rockwellshop.ui.productlist;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.rockwellstudios.rockwellshop.R;
+import com.rockwellstudios.rockwellshop.core.listeners.OnProductSelectedListener;
+import com.rockwellstudios.rockwellshop.model.LineItem;
+import com.rockwellstudios.rockwellshop.model.Product;
 import com.rockwellstudios.rockwellshop.ui.BaseFragment;
+import com.rockwellstudios.rockwellshop.ui.BaseListFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProductListFragment extends BaseFragment {
+public class ProductListFragment extends BaseListFragment implements OnProductSelectedListener {
 
-    private View mRootView;
 
+    private ProductListAdapter mAdapter;
 
     public ProductListFragment() {
-        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.fragment_product_list, container, false);
-        unbinder = ButterKnife.bind(this, mRootView);
+        super.onCreateView(inflater, container, savedInstanceState);
+
+        // setup adapter
+        List<Product> mProducts = new ArrayList<>();
+        mAdapter = new ProductListAdapter(mProducts, getActivity(), this);
+        mRecyclerView.setAdapter(mAdapter);
+
+        if (mProducts.size() < 1) {
+            showEmptyTextMessage();
+        } else {
+            hideEmptyTextMessage();
+        }
+
+
         return mRootView;
     }
 
+    @Override
+    public int getEmptyText() {
+        return R.string.no_product_found;
+    }
+
+
+    @Override
+    public void onSelectProduct(Product selectedProduct) {
+
+    }
+
+    @Override
+    public void onLongClickProduct(Product selectedProduct) {
+
+    }
 }

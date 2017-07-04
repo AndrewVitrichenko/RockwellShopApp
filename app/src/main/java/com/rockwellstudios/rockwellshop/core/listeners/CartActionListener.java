@@ -10,5 +10,5 @@ public interface CartActionListener {
 
     void onItemDelete(LineItem item);
 
-    void onItemQuantityChange(LineItem item);
+    void onItemQuantityChange(LineItem item, int newQuantity);
 }
