@@ -2,6 +2,7 @@ package com.rockwellstudios.rockwellshop.ui.productlist;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,10 +37,8 @@ public class ProductListFragment extends BaseListFragment implements OnProductSe
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         // setup adapter
         List<Product> mProducts = new ArrayList<>();
         mAdapter = new ProductListAdapter(mProducts, getActivity(), this);
@@ -50,9 +49,6 @@ public class ProductListFragment extends BaseListFragment implements OnProductSe
         } else {
             hideEmptyTextMessage();
         }
-
-
-        return mRootView;
     }
 
     @Override

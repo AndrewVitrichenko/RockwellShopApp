@@ -16,7 +16,7 @@
 
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/checkout_list_rv"
+            android:id="@+id/checkout_list_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
@@ -56,7 +56,7 @@
 
 
             <TextView
-                android:id="@+id/tvSubTotal"
+                android:id="@+id/sub_total_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -81,7 +81,7 @@
 
 
             <TextView
-                android:id="@+id/tvTax"
+                android:id="@+id/tax_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -106,7 +106,7 @@
 
 
             <TextView
-                android:id="@+id/tvTotalAmount"
+                android:id="@+id/total_amount_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

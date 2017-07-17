@@ -2,6 +2,7 @@ package com.rockwellstudios.rockwellshop.ui.customerlist;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,9 +38,8 @@ public class CustomerListFragment extends BaseListFragment implements OnCustomer
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater,container,savedInstanceState);
-
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         List<Customer> mCustomers = new ArrayList<>();
         mAdapter = new CustomerListAdapter(mCustomers, getActivity(), this);
         mRecyclerView.setAdapter(mAdapter);
@@ -50,7 +50,6 @@ public class CustomerListFragment extends BaseListFragment implements OnCustomer
             hideEmptyTextMessage();
         }
 
-        return mRootView;
     }
 
     @Override
