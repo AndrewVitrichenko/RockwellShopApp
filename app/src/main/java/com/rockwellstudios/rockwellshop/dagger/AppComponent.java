@@ -2,6 +2,7 @@ package com.rockwellstudios.rockwellshop.dagger;
 
 import com.rockwellstudios.rockwellshop.common.MainActivity;
 import com.rockwellstudios.rockwellshop.common.ShoppingCart;
+import com.rockwellstudios.rockwellshop.ui.productlist.ProductPresenter;
 
 import javax.inject.Singleton;
 
@@ -23,4 +24,6 @@ public interface AppComponent {
     void inject(MainActivity target);
 
     void inject(ShoppingCart target);
+
+    void inject(ProductPresenter target);
 }

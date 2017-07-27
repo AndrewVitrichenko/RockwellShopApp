@@ -1,5 +1,7 @@
 package com.rockwellstudios.rockwellshop.ui.productlist;
 
+import com.rockwellstudios.rockwellshop.core.listeners.onDatabaseOperationCompleteListener;
+import com.rockwellstudios.rockwellshop.model.Category;
 import com.rockwellstudios.rockwellshop.model.Product;
 
 import java.util.List;
@@ -13,13 +15,15 @@ public interface ProductListContract {
     interface Model {
         List<Product> getAllProducts();
 
+        List<Category> getAllCategories();
+
         Product getProductById(long id);
 
-        void deleteProduct(Product product);
+        void deleteProduct(Product product, onDatabaseOperationCompleteListener listener);
 
-        void addProduct(Product product);
+        void addProduct(Product product, onDatabaseOperationCompleteListener listener);
 
-        void updateProduct(Product product);
+        void updateProduct(Product product, onDatabaseOperationCompleteListener listener);
     }
 
     interface View {
@@ -42,6 +46,11 @@ public interface ProductListContract {
     }
 
     interface Presenter {
+
+        void bindView(ProductListContract.View view);
+
+        void unbindView();
+
         void loadProducts();
 
         void onAddProductButtonClicked();
@@ -54,7 +63,7 @@ public interface ProductListContract {
 
         void updateProduct(Product product);
 
-        void onGoogleButtonSearchClicked();
+        void onGoogleButtonSearchClicked(Product product);
 
         Product getProduct(long id);
 
