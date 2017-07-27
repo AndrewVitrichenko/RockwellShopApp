@@ -5,18 +5,27 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.rockwellstudios.rockwellshop.MainApplication;
+import com.rockwellstudios.rockwellshop.core.listeners.events.CustomerSelectedEvent;
+import com.rockwellstudios.rockwellshop.core.listeners.events.UpdateToolbarEvent;
 import com.rockwellstudios.rockwellshop.model.Customer;
 import com.rockwellstudios.rockwellshop.model.LineItem;
 import com.rockwellstudios.rockwellshop.util.Constants;
+import com.squareup.otto.Bus;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Created by Andrew on 18.06.2017.
  */
 
 public class ShoppingCart implements ShoppingCartContract {
+
+    @Inject
+    Bus mBus;
 
     private List<LineItem> shoppingCart;
     private Customer selectedCustomer;
@@ -29,6 +38,7 @@ public class ShoppingCart implements ShoppingCartContract {
     public ShoppingCart(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
         this.editor = sharedPreferences.edit();
+        MainApplication.getInstance().getAppComponent().inject(this);
         initShoppingCart();
     }
 
@@ -59,6 +69,8 @@ public class ShoppingCart implements ShoppingCartContract {
                 selectedCustomer = gson.fromJson(serializedCustomer, Customer.class);
             }
         }
+
+        populateToolBar();
 
     }
 
@@ -99,16 +111,29 @@ public class ShoppingCart implements ShoppingCartContract {
         if (!isItemInCart) {
             shoppingCart.add(item);
         }
+
+        populateToolBar();
     }
 
     @Override
     public void removeItemFromCart(LineItem item) {
         shoppingCart.remove(item);
+        if (shoppingCart.size() == 0) {
+            mBus.post(new CustomerSelectedEvent(new Customer(), true));
+        }
+        populateToolBar();
     }
 
     @Override
     public void clearAllItemsFromCart() {
         shoppingCart.clear();
+
+        editor.putString(Constants.SERIALIZED_CART_ITEMS, "").apply();
+        editor.putString(Constants.SERIALIZED_CUSTOMER, "").apply();
+        editor.putBoolean(Constants.OPEN_CART_EXISTS, false).apply();
+
+        populateToolBar();
+        mBus.post(new CustomerSelectedEvent(new Customer(), true));
     }
 
     @Override
@@ -119,6 +144,7 @@ public class ShoppingCart implements ShoppingCartContract {
     @Override
     public void setCustomer(Customer customer) {
         selectedCustomer = customer;
+        mBus.post(new CustomerSelectedEvent(selectedCustomer, false));
     }
 
     @Override
@@ -139,6 +165,12 @@ public class ShoppingCart implements ShoppingCartContract {
             item.setQuantity(qty);
             shoppingCart.add(item);
         }
+
+        populateToolBar();
+    }
+
+    public void populateToolBar() {
+        mBus.post(new UpdateToolbarEvent(shoppingCart));
     }
 
     @Override
@@ -149,5 +181,7 @@ public class ShoppingCart implements ShoppingCartContract {
     @Override
     public void completeCheckout() {
         shoppingCart.clear();
+        populateToolBar();
+        mBus.post(new CustomerSelectedEvent(new Customer(), true));
     }
 }
