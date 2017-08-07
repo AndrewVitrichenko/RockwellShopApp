@@ -2,10 +2,9 @@ package com.rockwellstudios.rockwellshop.ui.productlist;
 
 import com.rockwellstudios.rockwellshop.MainApplication;
 import com.rockwellstudios.rockwellshop.common.ShoppingCart;
-import com.rockwellstudios.rockwellshop.core.listeners.onDatabaseOperationCompleteListener;
+import com.rockwellstudios.rockwellshop.core.listeners.OnDatabaseOperationCompleteListener;
 import com.rockwellstudios.rockwellshop.model.LineItem;
 import com.rockwellstudios.rockwellshop.model.Product;
-import com.squareup.otto.Bus;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import javax.inject.Inject;
  * Created by andrew on 27.07.17.
  */
 
-public class ProductPresenter implements ProductListContract.Presenter, onDatabaseOperationCompleteListener {
+public class ProductPresenter implements ProductListContract.Presenter, OnDatabaseOperationCompleteListener {
 
     private ProductListContract.View view;
 

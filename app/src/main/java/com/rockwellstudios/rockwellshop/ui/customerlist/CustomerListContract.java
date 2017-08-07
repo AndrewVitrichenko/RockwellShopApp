@@ -1,5 +1,6 @@
 package com.rockwellstudios.rockwellshop.ui.customerlist;
 
+import com.rockwellstudios.rockwellshop.core.listeners.OnDatabaseOperationCompleteListener;
 import com.rockwellstudios.rockwellshop.model.Customer;
 
 import java.util.List;
@@ -15,11 +16,11 @@ public class CustomerListContract {
 
         Customer getCustomerById(long id);
 
-        void addCustomer(Customer customer);
+        void addCustomer(Customer customer,OnDatabaseOperationCompleteListener listener);
 
-        void deleteCustomer(Customer customer);
+        void deleteCustomer(Customer customer,OnDatabaseOperationCompleteListener listener);
 
-        void updateCustomer(Customer customer);
+        void updateCustomer(Customer customer,OnDatabaseOperationCompleteListener listener);
     }
 
     interface View {
@@ -40,6 +41,8 @@ public class CustomerListContract {
 
     interface Presenter {
 
+        void bindView(CustomerListContract.View mView);
+
         void loadCustomers();
 
         Customer getCustomerById(long id);
@@ -50,11 +53,11 @@ public class CustomerListContract {
 
         void addCustomer(Customer customer);
 
-        void onDeleteCustomerButtonClicked();
+        void onDeleteCustomerButtonClicked(Customer customer);
 
         void deleteCustomer(Customer customer);
 
-        void onEditCustomerButtonClicked();
+        void onEditCustomerButtonClicked(Customer customer);
 
         void updateCustomer(Customer customer);
 

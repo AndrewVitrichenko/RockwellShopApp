@@ -1,6 +1,6 @@
 package com.rockwellstudios.rockwellshop.ui.productlist;
 
-import com.rockwellstudios.rockwellshop.core.listeners.onDatabaseOperationCompleteListener;
+import com.rockwellstudios.rockwellshop.core.listeners.OnDatabaseOperationCompleteListener;
 import com.rockwellstudios.rockwellshop.model.Category;
 import com.rockwellstudios.rockwellshop.model.Product;
 
@@ -19,11 +19,11 @@ public interface ProductListContract {
 
         Product getProductById(long id);
 
-        void deleteProduct(Product product, onDatabaseOperationCompleteListener listener);
+        void deleteProduct(Product product, OnDatabaseOperationCompleteListener listener);
 
-        void addProduct(Product product, onDatabaseOperationCompleteListener listener);
+        void addProduct(Product product, OnDatabaseOperationCompleteListener listener);
 
-        void updateProduct(Product product, onDatabaseOperationCompleteListener listener);
+        void updateProduct(Product product, OnDatabaseOperationCompleteListener listener);
     }
 
     interface View {
