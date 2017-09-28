@@ -20,7 +20,7 @@ public class LineItem extends Product{
         this.quantity = quantity;
     }
 
-    private double getSumPrice(){
+    public double getSumPrice(){
         return getSalePrice() * quantity;
     }
 }
