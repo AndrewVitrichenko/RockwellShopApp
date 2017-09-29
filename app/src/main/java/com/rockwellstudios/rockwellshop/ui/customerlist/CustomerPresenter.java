@@ -1,7 +1,6 @@
 package com.rockwellstudios.rockwellshop.ui.customerlist;
 
 import com.rockwellstudios.rockwellshop.MainApplication;
-import com.rockwellstudios.rockwellshop.common.MainActivity;
 import com.rockwellstudios.rockwellshop.common.ShoppingCart;
 import com.rockwellstudios.rockwellshop.core.listeners.OnDatabaseOperationCompleteListener;
 import com.rockwellstudios.rockwellshop.model.Customer;

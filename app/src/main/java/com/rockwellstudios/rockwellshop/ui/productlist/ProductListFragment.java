@@ -3,32 +3,20 @@ package com.rockwellstudios.rockwellshop.ui.productlist;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.rockwellstudios.rockwellshop.R;
 import com.rockwellstudios.rockwellshop.core.listeners.OnProductSelectedListener;
-import com.rockwellstudios.rockwellshop.model.LineItem;
 import com.rockwellstudios.rockwellshop.model.Product;
-import com.rockwellstudios.rockwellshop.ui.BaseFragment;
 import com.rockwellstudios.rockwellshop.ui.BaseListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProductListFragment extends BaseListFragment implements OnProductSelectedListener {
+public class ProductListFragment extends BaseListFragment implements OnProductSelectedListener,ProductListContract.View {
 
 
     private ProductListAdapter mAdapter;
@@ -64,6 +52,46 @@ public class ProductListFragment extends BaseListFragment implements OnProductSe
 
     @Override
     public void onLongClickProduct(Product selectedProduct) {
+
+    }
+
+    @Override
+    public void showProducts(List<Product> mProducts) {
+
+    }
+
+    @Override
+    public void showAddProductForm() {
+
+    }
+
+    @Override
+    public void showEditProductForm(Product product) {
+
+    }
+
+    @Override
+    public void showDeleteProductPromt(Product product) {
+
+    }
+
+    @Override
+    public void showGoogleSearch(Product product) {
+
+    }
+
+    @Override
+    public void showEmptyText() {
+
+    }
+
+    @Override
+    public void hideEmptyText() {
+
+    }
+
+    @Override
+    public void showMessage(String message) {
 
     }
 }

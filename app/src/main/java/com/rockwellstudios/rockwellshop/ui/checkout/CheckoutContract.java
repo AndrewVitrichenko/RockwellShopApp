@@ -1,5 +1,6 @@
 package com.rockwellstudios.rockwellshop.ui.checkout;
 
+import com.rockwellstudios.rockwellshop.core.listeners.OnDatabaseOperationCompleteListener;
 import com.rockwellstudios.rockwellshop.model.LineItem;
 import com.rockwellstudios.rockwellshop.model.Transaction;
 
@@ -14,7 +15,7 @@ public class CheckoutContract {
     interface Model {
         List<LineItem> getAllLineItems();
 
-        void saveTransaction(Transaction transaction);
+        void saveTransaction(Transaction transaction, OnDatabaseOperationCompleteListener listener);
 
         void updateTransaction(Transaction transaction);
 
@@ -38,6 +39,11 @@ public class CheckoutContract {
     }
 
     interface Presenter {
+
+        void bindView(CheckoutContract.View mView);
+
+        void unbindView();
+
         void loadLineItems();
 
         void onCheckoutButtonClicked();

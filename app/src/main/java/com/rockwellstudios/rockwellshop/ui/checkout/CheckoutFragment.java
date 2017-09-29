@@ -16,10 +16,8 @@ import android.widget.TextView;
 
 import com.rockwellstudios.rockwellshop.R;
 import com.rockwellstudios.rockwellshop.core.listeners.CartActionListener;
-import com.rockwellstudios.rockwellshop.model.Customer;
 import com.rockwellstudios.rockwellshop.model.LineItem;
 import com.rockwellstudios.rockwellshop.ui.BaseFragment;
-import com.rockwellstudios.rockwellshop.ui.customerlist.CustomerListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

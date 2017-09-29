@@ -9,7 +9,7 @@ import java.util.List;
  * Created by andrew on 27.07.17.
  */
 
-public class CustomerListContract {
+public interface CustomerListContract {
 
     interface Model {
         List<Customer> getAllCustomers();
