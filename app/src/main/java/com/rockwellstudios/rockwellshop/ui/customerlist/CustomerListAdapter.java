@@ -31,13 +31,17 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
     private int selectedPosition = 0;
     private RequestOptions options;
 
-    public CustomerListAdapter(List<Customer> customers, Context context, OnCustomerSelectedListener listener) {
-        mCustomers = customers;
+    public CustomerListAdapter(Context context, OnCustomerSelectedListener listener) {
         mContext = context;
         mListener = listener;
         options = new RequestOptions();
         options.fitCenter();
         options.error(R.drawable.profile_icon);
+    }
+
+    public void setCustomers(List<Customer> customers){
+        mCustomers = customers;
+        notifyDataSetChanged();
     }
 
 

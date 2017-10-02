@@ -19,7 +19,7 @@ public class CheckoutPresenter implements CheckoutContract.Presenter, OnDatabase
     private CheckoutContract.View mView;
 //    @Inject
     CheckoutContract.Model mRepository;
-//    @Inject
+    @Inject
     ShoppingCart mCart;
 
     private double subTotal = 0.0;

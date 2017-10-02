@@ -18,13 +18,13 @@ public class CustomerPresenter implements CustomerListContract.Presenter, OnData
 
     private CustomerListContract.View mView;
 
-//    @Inject
+    @Inject
     CustomerListContract.Model mRepository;
 
-//    @Inject
+    @Inject
     ShoppingCart shoppingCart;
 
-//    @Inject
+    @Inject
     Bus mBus;
 
     public CustomerPresenter() {
