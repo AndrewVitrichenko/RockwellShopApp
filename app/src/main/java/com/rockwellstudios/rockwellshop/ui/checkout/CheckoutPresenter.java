@@ -17,9 +17,9 @@ import javax.inject.Inject;
 public class CheckoutPresenter implements CheckoutContract.Presenter, OnDatabaseOperationCompleteListener {
 
     private CheckoutContract.View mView;
-    @Inject
+//    @Inject
     CheckoutContract.Model mRepository;
-    @Inject
+//    @Inject
     ShoppingCart mCart;
 
     private double subTotal = 0.0;

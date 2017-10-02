@@ -5,6 +5,7 @@ import android.app.Application;
 import com.rockwellstudios.rockwellshop.dagger.AppComponent;
 import com.rockwellstudios.rockwellshop.dagger.AppModule;
 import com.rockwellstudios.rockwellshop.dagger.BusModule;
+import com.rockwellstudios.rockwellshop.dagger.DaggerAppComponent;
 import com.rockwellstudios.rockwellshop.dagger.ShoppingCartModule;
 
 /**

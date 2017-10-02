@@ -31,8 +31,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     private final OnProductSelectedListener mListener;
     private RequestOptions options;
 
-    public ProductListAdapter(List<Product> mProducts, Context mContext, OnProductSelectedListener mListener) {
-        this.mProducts = mProducts;
+    public ProductListAdapter(Context mContext, OnProductSelectedListener mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
         options = new RequestOptions();
@@ -40,10 +39,15 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         options.error(R.drawable.default_image);
     }
 
+    public void setProducts(List<Product> products){
+        mProducts = products;
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_product_list, parent);
+        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_product_list, parent,false);
         return new ProductViewHolder(rootView);
     }
 

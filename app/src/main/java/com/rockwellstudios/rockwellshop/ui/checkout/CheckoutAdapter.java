@@ -51,7 +51,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.Checko
 
     @Override
     public CheckoutViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_shopping_card_list, parent);
+        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_shopping_card_list, parent,false);
         return new CheckoutViewHolder(rootView);
     }
 

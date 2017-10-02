@@ -20,6 +20,7 @@ public class ProductListFragment extends BaseListFragment implements OnProductSe
 
 
     private ProductListAdapter mAdapter;
+    private ProductListContract.Presenter mPresenter;
 
     public ProductListFragment() {
     }
@@ -28,15 +29,18 @@ public class ProductListFragment extends BaseListFragment implements OnProductSe
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // setup adapter
-        List<Product> mProducts = new ArrayList<>();
-        mAdapter = new ProductListAdapter(mProducts, getActivity(), this);
+        mAdapter = new ProductListAdapter(getActivity(), this);
         mRecyclerView.setAdapter(mAdapter);
 
-        if (mProducts.size() < 1) {
-            showEmptyTextMessage();
-        } else {
-            hideEmptyTextMessage();
-        }
+        mPresenter = new ProductPresenter();
+        mPresenter.bindView(this);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.loadProducts();
     }
 
     @Override
@@ -57,7 +61,7 @@ public class ProductListFragment extends BaseListFragment implements OnProductSe
 
     @Override
     public void showProducts(List<Product> mProducts) {
-
+        mAdapter.setProducts(mProducts);
     }
 
     @Override

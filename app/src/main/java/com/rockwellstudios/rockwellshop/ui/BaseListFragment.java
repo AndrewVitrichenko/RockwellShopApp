@@ -32,12 +32,11 @@ public abstract class BaseListFragment extends BaseFragment {
     @BindView(R.id.fab)
     protected FloatingActionButton mFab;
 
-    protected View mRootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.fragment_base_list, container, false);
+        View mRootView = inflater.inflate(R.layout.fragment_base_list, container,false);
         unbinder = ButterKnife.bind(this, mRootView);
         RecyclerView.LayoutManager mlayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mlayoutManager);
@@ -56,4 +55,6 @@ public abstract class BaseListFragment extends BaseFragment {
         mRecyclerView.setVisibility(View.GONE);
         mEmptyText.setVisibility(View.VISIBLE);
     }
+
+
 }
