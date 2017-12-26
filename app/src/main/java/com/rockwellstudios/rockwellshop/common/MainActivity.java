@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.rockwellstudios.rockwellshop.R;
+import com.rockwellstudios.rockwellshop.data.DataBaseHelper;
 import com.rockwellstudios.rockwellshop.ui.ViewPagerAdapter;
 import com.rockwellstudios.rockwellshop.ui.checkout.CheckoutFragment;
 import com.rockwellstudios.rockwellshop.ui.customerlist.CustomerListFragment;
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ViewPagerAdapter(getSupportFragmentManager(),this);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
 

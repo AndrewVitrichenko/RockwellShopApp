@@ -4,6 +4,7 @@ import com.rockwellstudios.rockwellshop.ui.customerlist.CustomerInMemoryReposito
 import com.rockwellstudios.rockwellshop.ui.customerlist.CustomerListContract;
 import com.rockwellstudios.rockwellshop.ui.productlist.ProductInMemoryRepository;
 import com.rockwellstudios.rockwellshop.ui.productlist.ProductListContract;
+import com.rockwellstudios.rockwellshop.ui.productlist.ProductListSqlRepository;
 
 import javax.inject.Singleton;
 
@@ -26,6 +27,6 @@ public class PersistenceModule {
     @Provides
     @Singleton
     ProductListContract.Model provideProductRepository(){
-        return new ProductInMemoryRepository();
+        return new ProductListSqlRepository();
     }
 }

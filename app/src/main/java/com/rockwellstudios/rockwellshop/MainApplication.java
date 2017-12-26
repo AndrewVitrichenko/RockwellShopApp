@@ -7,6 +7,7 @@ import com.rockwellstudios.rockwellshop.dagger.AppModule;
 import com.rockwellstudios.rockwellshop.dagger.BusModule;
 import com.rockwellstudios.rockwellshop.dagger.DaggerAppComponent;
 import com.rockwellstudios.rockwellshop.dagger.ShoppingCartModule;
+import com.rockwellstudios.rockwellshop.data.DataBaseHelper;
 
 /**
  * Created by Andrew on 23.07.2017.
@@ -22,6 +23,7 @@ public class MainApplication extends Application {
         super.onCreate();
         instance = this;
         getAppComponent();
+        DataBaseHelper.createInstance(instance);
     }
 
     public AppComponent getAppComponent() {

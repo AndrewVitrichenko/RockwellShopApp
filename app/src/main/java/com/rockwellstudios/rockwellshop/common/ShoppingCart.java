@@ -6,11 +6,11 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rockwellstudios.rockwellshop.MainApplication;
-import com.rockwellstudios.rockwellshop.core.listeners.events.CustomerSelectedEvent;
-import com.rockwellstudios.rockwellshop.core.listeners.events.UpdateToolbarEvent;
+import com.rockwellstudios.rockwellshop.core.events.CustomerSelectedEvent;
+import com.rockwellstudios.rockwellshop.core.events.UpdateToolbarEvent;
 import com.rockwellstudios.rockwellshop.model.Customer;
 import com.rockwellstudios.rockwellshop.model.LineItem;
-import com.rockwellstudios.rockwellshop.util.Constants;
+import com.rockwellstudios.rockwellshop.util.DbConstants;
 import com.squareup.otto.Bus;
 
 import java.util.ArrayList;
@@ -47,14 +47,14 @@ public class ShoppingCart implements ShoppingCartContract {
         selectedCustomer = new Customer();
         Gson gson = new Gson();
 
-        if (sharedPreferences.getBoolean(Constants.OPEN_CART_EXISTS, false)) {
-            String serializedItems = sharedPreferences.getString(Constants.SERIALIZED_CART_ITEMS, "");
+        if (sharedPreferences.getBoolean(DbConstants.OPEN_CART_EXISTS, false)) {
+            String serializedItems = sharedPreferences.getString(DbConstants.SERIALIZED_CART_ITEMS, "");
 
             if (DEBUG) {
                 Log.d(LOG_TAG, "Serialized items " + serializedItems);
             }
 
-            String serializedCustomer = sharedPreferences.getString(Constants.SERIALIZED_CUSTOMER, "");
+            String serializedCustomer = sharedPreferences.getString(DbConstants.SERIALIZED_CUSTOMER, "");
 
             if (DEBUG) {
                 Log.d(LOG_TAG, "Serialized customer " + serializedCustomer);
@@ -87,9 +87,9 @@ public class ShoppingCart implements ShoppingCartContract {
                 Log.d(LOG_TAG, "Saving customer " + serializedCustomer);
             }
 
-            editor.putString(Constants.SERIALIZED_CART_ITEMS, serializedItems).apply();
-            editor.putString(Constants.SERIALIZED_CUSTOMER, serializedCustomer).apply();
-            editor.putBoolean(Constants.OPEN_CART_EXISTS, true).apply();
+            editor.putString(DbConstants.SERIALIZED_CART_ITEMS, serializedItems).apply();
+            editor.putString(DbConstants.SERIALIZED_CUSTOMER, serializedCustomer).apply();
+            editor.putBoolean(DbConstants.OPEN_CART_EXISTS, true).apply();
         }
     }
 
@@ -128,9 +128,9 @@ public class ShoppingCart implements ShoppingCartContract {
     public void clearAllItemsFromCart() {
         shoppingCart.clear();
 
-        editor.putString(Constants.SERIALIZED_CART_ITEMS, "").apply();
-        editor.putString(Constants.SERIALIZED_CUSTOMER, "").apply();
-        editor.putBoolean(Constants.OPEN_CART_EXISTS, false).apply();
+        editor.putString(DbConstants.SERIALIZED_CART_ITEMS, "").apply();
+        editor.putString(DbConstants.SERIALIZED_CUSTOMER, "").apply();
+        editor.putBoolean(DbConstants.OPEN_CART_EXISTS, false).apply();
 
         populateToolBar();
         mBus.post(new CustomerSelectedEvent(new Customer(), true));

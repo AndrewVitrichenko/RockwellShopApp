@@ -1,5 +1,10 @@
 package com.rockwellstudios.rockwellshop.model;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+
+import com.rockwellstudios.rockwellshop.util.DbConstants;
+
 /**
  * Created by Andrew on 18.06.2017.
  */
@@ -17,11 +22,11 @@ public class Product {
     private long dateAdded;
     private long dateOfLastTransaction;
 
-    public Product(){
+    public Product() {
 
     }
 
-    public Product(Product product){
+    public Product(Product product) {
         this.id = product.getId();
         this.productName = product.getProductName();
         this.description = product.getDescription();
@@ -121,5 +126,37 @@ public class Product {
 
     public void setDateOfLastTransaction(long dateOfLastTransaction) {
         this.dateOfLastTransaction = dateOfLastTransaction;
+    }
+
+    public static Product getProductFromCursor(Cursor cursor) {
+        Product product = new Product();
+        product.setCategoryId(cursor.getLong(cursor.getColumnIndex(DbConstants.COLUMN_ID)));
+        product.setProductName(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_NAME)));
+        product.setDescription(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_DESCRIPTION)));
+        product.setPromoMessage(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_PROMO_MESSAGE)));
+        product.setSalePrice(cursor.getDouble(cursor.getColumnIndex(DbConstants.COLUMN_PRICE)));
+        product.setPurchasePrice(cursor.getDouble(cursor.getColumnIndex(DbConstants.COLUMN_PURCHASE_PRICE)));
+        product.setImagePath(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_IMAGE_PATH)));
+        product.setCategoryId(cursor.getLong(cursor.getColumnIndex(DbConstants.COLUMN_CATEGORY_ID)));
+        product.setCategoryName(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_CATEGORY_NAME)));
+        product.setDateAdded(cursor.getLong(cursor.getColumnIndex(DbConstants.COLUMN_DATE_CREATED)));
+        product.setDateOfLastTransaction(cursor.getLong(cursor.getColumnIndex(DbConstants.COLUMN_LAST_UPDATED)));
+        return product;
+    }
+
+    public static ContentValues getContentValuesFromProduct(Product product) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DbConstants.COLUMN_ID, product.getId());
+        contentValues.put(DbConstants.COLUMN_NAME, product.getProductName());
+        contentValues.put(DbConstants.COLUMN_DESCRIPTION, product.getDescription());
+        contentValues.put(DbConstants.COLUMN_PROMO_MESSAGE, product.getPromoMessage());
+        contentValues.put(DbConstants.COLUMN_PRICE, product.getSalePrice());
+        contentValues.put(DbConstants.COLUMN_PURCHASE_PRICE, product.getPurchasePrice());
+        contentValues.put(DbConstants.COLUMN_IMAGE_PATH, product.getImagePath());
+        contentValues.put(DbConstants.COLUMN_CATEGORY_ID, product.getCategoryId());
+        contentValues.put(DbConstants.COLUMN_CATEGORY_NAME, product.getCategoryName());
+        contentValues.put(DbConstants.COLUMN_DATE_CREATED, product.getDateAdded());
+        contentValues.put(DbConstants.COLUMN_LAST_UPDATED, product.getDateOfLastTransaction());
+        return contentValues;
     }
 }

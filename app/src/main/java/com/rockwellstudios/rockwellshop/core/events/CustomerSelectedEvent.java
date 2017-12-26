@@ -1,4 +1,4 @@
-package com.rockwellstudios.rockwellshop.core.listeners.events;
+package com.rockwellstudios.rockwellshop.core.events;
 
 import com.rockwellstudios.rockwellshop.model.Customer;
 
