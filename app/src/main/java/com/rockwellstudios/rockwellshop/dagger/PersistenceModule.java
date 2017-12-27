@@ -2,9 +2,12 @@ package com.rockwellstudios.rockwellshop.dagger;
 
 import com.rockwellstudios.rockwellshop.ui.customerlist.CustomerInMemoryRepository;
 import com.rockwellstudios.rockwellshop.ui.customerlist.CustomerListContract;
+import com.rockwellstudios.rockwellshop.ui.customerlist.CustomerListSqlRepository;
 import com.rockwellstudios.rockwellshop.ui.productlist.ProductInMemoryRepository;
 import com.rockwellstudios.rockwellshop.ui.productlist.ProductListContract;
 import com.rockwellstudios.rockwellshop.ui.productlist.ProductListSqlRepository;
+import com.rockwellstudios.rockwellshop.ui.transaction.TransactionContract;
+import com.rockwellstudios.rockwellshop.ui.transaction.TransactionSqlRepository;
 
 import javax.inject.Singleton;
 
@@ -20,13 +23,19 @@ public class PersistenceModule {
 
     @Provides
     @Singleton
-    CustomerListContract.Model provideCustomerRepository(){
-        return new CustomerInMemoryRepository();
+    CustomerListContract.Model provideCustomerRepository() {
+        return new CustomerListSqlRepository();
     }
 
     @Provides
     @Singleton
-    ProductListContract.Model provideProductRepository(){
+    ProductListContract.Model provideProductRepository() {
         return new ProductListSqlRepository();
+    }
+
+    @Provides
+    @Singleton
+    TransactionContract.Model provideTransactionRepository() {
+        return new TransactionSqlRepository();
     }
 }

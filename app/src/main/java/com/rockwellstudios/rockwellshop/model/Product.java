@@ -23,7 +23,17 @@ public class Product {
     private long dateOfLastTransaction;
 
     public Product() {
-
+        id = 0;
+        productName = "";
+        description = "";
+        promoMessage = "";
+        salePrice = 0;
+        purchasePrice = 0;
+        imagePath = "";
+        categoryId = 0;
+        categoryName = "";
+        dateAdded = 0;
+        dateOfLastTransaction = 0;
     }
 
     public Product(Product product) {
@@ -130,7 +140,7 @@ public class Product {
 
     public static Product getProductFromCursor(Cursor cursor) {
         Product product = new Product();
-        product.setCategoryId(cursor.getLong(cursor.getColumnIndex(DbConstants.COLUMN_ID)));
+        product.setId(cursor.getLong(cursor.getColumnIndex(DbConstants.COLUMN_ID)));
         product.setProductName(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_NAME)));
         product.setDescription(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_DESCRIPTION)));
         product.setPromoMessage(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_PROMO_MESSAGE)));
@@ -144,19 +154,19 @@ public class Product {
         return product;
     }
 
-    public static ContentValues getContentValuesFromProduct(Product product) {
+    public static ContentValues getContentValuesFromProduct(Product product, long categoryId) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DbConstants.COLUMN_ID, product.getId());
         contentValues.put(DbConstants.COLUMN_NAME, product.getProductName());
         contentValues.put(DbConstants.COLUMN_DESCRIPTION, product.getDescription());
         contentValues.put(DbConstants.COLUMN_PROMO_MESSAGE, product.getPromoMessage());
         contentValues.put(DbConstants.COLUMN_PRICE, product.getSalePrice());
         contentValues.put(DbConstants.COLUMN_PURCHASE_PRICE, product.getPurchasePrice());
         contentValues.put(DbConstants.COLUMN_IMAGE_PATH, product.getImagePath());
-        contentValues.put(DbConstants.COLUMN_CATEGORY_ID, product.getCategoryId());
+        contentValues.put(DbConstants.COLUMN_CATEGORY_ID, categoryId);
         contentValues.put(DbConstants.COLUMN_CATEGORY_NAME, product.getCategoryName());
-        contentValues.put(DbConstants.COLUMN_DATE_CREATED, product.getDateAdded());
-        contentValues.put(DbConstants.COLUMN_LAST_UPDATED, product.getDateOfLastTransaction());
+        contentValues.put(DbConstants.COLUMN_DATE_CREATED, System.currentTimeMillis());
+        contentValues.put(DbConstants.COLUMN_LAST_UPDATED, System.currentTimeMillis());
         return contentValues;
     }
+
 }

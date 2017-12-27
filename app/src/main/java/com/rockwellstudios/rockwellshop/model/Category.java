@@ -1,5 +1,6 @@
 package com.rockwellstudios.rockwellshop.model;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.rockwellstudios.rockwellshop.util.DbConstants;
@@ -14,7 +15,8 @@ public class Category {
     private String categoryName;
 
     public Category() {
-
+        id = 0;
+        categoryName = "empty";
     }
 
     public long getId() {
@@ -36,7 +38,14 @@ public class Category {
     public static Category getCategoryFromCursor(Cursor cursor) {
         Category category = new Category();
         category.setId(cursor.getLong(cursor.getColumnIndex(DbConstants.COLUMN_ID)));
-        category.setCategoryName(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_CATEGORY_NAME)));
+        category.setCategoryName(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_NAME)));
         return category;
+    }
+
+    public static ContentValues getCvFromCategory(Category category) {
+        ContentValues cv = new ContentValues();
+//        cv.put(DbConstants.COLUMN_ID, category.getId());
+        cv.put(DbConstants.COLUMN_NAME, category.getCategoryName());
+        return cv;
     }
 }

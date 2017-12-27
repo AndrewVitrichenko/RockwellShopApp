@@ -1,5 +1,10 @@
 package com.rockwellstudios.rockwellshop.model;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+
+import com.rockwellstudios.rockwellshop.util.DbConstants;
+
 /**
  * Created by Andrew on 18.06.2017.
  */
@@ -138,5 +143,40 @@ public class Customer {
 
     public void setDateOfLastTransaction(long dateOfLastTransaction) {
         this.dateOfLastTransaction = dateOfLastTransaction;
+    }
+
+    public static Customer getCustomerFromCursor(Cursor cursor) {
+        Customer customer = new Customer();
+        customer.setId(cursor.getLong(cursor.getColumnIndex(DbConstants.COLUMN_ID)));
+        customer.setCustomerName(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_NAME)));
+        customer.setEmailAddress(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_EMAIL)));
+        customer.setPhoneNumber(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_PHONE)));
+        customer.setProfileImagePath(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_IMAGE_PATH)));
+        customer.setStreetAddress(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_STREET1)));
+        customer.setStreetAddressTwo(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_STREET2)));
+        customer.setCity(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_CITY)));
+        customer.setState(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_STATE)));
+        customer.setPostalCode(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_ZIP)));
+        customer.setNote(cursor.getString(cursor.getColumnIndex(DbConstants.COLUMN_NOTE)));
+        customer.setDateAdded(cursor.getLong(cursor.getColumnIndex(DbConstants.COLUMN_DATE_CREATED)));
+        customer.setDateOfLastTransaction(cursor.getLong(cursor.getColumnIndex(DbConstants.COLUMN_LAST_UPDATED)));
+        return customer;
+    }
+
+    public static ContentValues getCvFromCustomer(Customer customer) {
+        ContentValues cv = new ContentValues();
+        cv.put(DbConstants.COLUMN_NAME, customer.getCustomerName());
+        cv.put(DbConstants.COLUMN_EMAIL, customer.getEmailAddress());
+        cv.put(DbConstants.COLUMN_PHONE, customer.getPhoneNumber());
+        cv.put(DbConstants.COLUMN_IMAGE_PATH, customer.getProfileImagePath());
+        cv.put(DbConstants.COLUMN_STREET1, customer.getStreetAddress());
+        cv.put(DbConstants.COLUMN_STREET2, customer.getStreetAddressTwo());
+        cv.put(DbConstants.COLUMN_CITY, customer.getCity());
+        cv.put(DbConstants.COLUMN_STATE, customer.getState());
+        cv.put(DbConstants.COLUMN_ZIP, customer.getPostalCode());
+        cv.put(DbConstants.COLUMN_NOTE, customer.getNote());
+        cv.put(DbConstants.COLUMN_DATE_CREATED, System.currentTimeMillis());
+        cv.put(DbConstants.COLUMN_LAST_UPDATED, System.currentTimeMillis());
+        return cv;
     }
 }

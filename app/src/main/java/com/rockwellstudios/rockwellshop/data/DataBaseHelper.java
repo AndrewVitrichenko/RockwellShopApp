@@ -19,6 +19,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static DataBaseHelper sDataBaseHelperInstance;
 
+    public DataBaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
     public static void createInstance(Context mContext) {
         if (sDataBaseHelperInstance == null) {
             sDataBaseHelperInstance = new DataBaseHelper(mContext);
@@ -29,10 +33,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return sDataBaseHelperInstance;
     }
 
-
-    public DataBaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {

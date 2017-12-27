@@ -6,6 +6,7 @@ import com.rockwellstudios.rockwellshop.ui.checkout.CheckoutPresenter;
 import com.rockwellstudios.rockwellshop.ui.customerlist.CustomerPresenter;
 import com.rockwellstudios.rockwellshop.ui.productlist.ProductPresenter;
 import com.rockwellstudios.rockwellshop.ui.transaction.TransactionPresenter;
+import com.rockwellstudios.rockwellshop.ui.transaction.TransactionSqlRepository;
 
 import javax.inject.Singleton;
 
@@ -36,4 +37,6 @@ public interface AppComponent {
     void inject(CheckoutPresenter target);
 
     void inject(TransactionPresenter target);
+
+    void inject(TransactionSqlRepository target);
 }

@@ -21,11 +21,9 @@ import java.util.Locale;
 public class ProductListSqlRepository implements ProductListContract.Model {
 
     private SQLiteDatabase database;
-    private DataBaseHelper dbHelper;
 
     public ProductListSqlRepository() {
-        dbHelper = DataBaseHelper.getInstance();
-        database = dbHelper.getWritableDatabase();
+        database = DataBaseHelper.getInstance().getWritableDatabase();
     }
 
 
@@ -69,7 +67,7 @@ public class ProductListSqlRepository implements ProductListContract.Model {
     public Product getProductById(long id) {
         if (database != null) {
             String query = String.format(Locale.getDefault(),
-                    "SELECT * FROM %s WHERE %s = %d", DbConstants.PRODUCT_TABLE, DbConstants.COLUMN_ID, id);
+                    "%s %d", DbConstants.SELECT_PRODUCT_BY_ID, id);
             Cursor cursor = database.rawQuery(query, null);
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
@@ -98,8 +96,9 @@ public class ProductListSqlRepository implements ProductListContract.Model {
     public void addProduct(Product product, OnDatabaseOperationCompleteListener listener) {
         if (database != null) {
             try {
+                long categoryId = createOrGetCategoryId(product.getCategoryName(), listener);
                 database.insertOrThrow(DbConstants.PRODUCT_TABLE, null,
-                        Product.getContentValuesFromProduct(product));
+                        Product.getContentValuesFromProduct(product, categoryId));
                 listener.onDatabaseOperationSucceed("Success");
             } catch (SQLException e) {
                 listener.onDatabaseOperationFailed(e.getMessage());
@@ -107,10 +106,51 @@ public class ProductListSqlRepository implements ProductListContract.Model {
         }
     }
 
+    public long createOrGetCategoryId(String categoryName, OnDatabaseOperationCompleteListener listener) {
+        Category foundCategory = getCategory(categoryName);
+        if (foundCategory == null) {
+            foundCategory = addCategory(categoryName, listener);
+        }
+        return foundCategory.getId();
+    }
+
+    private Category addCategory(String categoryName, OnDatabaseOperationCompleteListener listener) {
+        Category category = new Category();
+        category.setCategoryName(categoryName);
+        saveCategory(category, listener);
+        return category;
+    }
+
+    private void saveCategory(Category category, OnDatabaseOperationCompleteListener listener) {
+        if (database != null) {
+            try {
+                database.insertOrThrow(DbConstants.CATEGORY_TABLE, null, Category.getCvFromCategory(category));
+            } catch (SQLException e) {
+                listener.onDatabaseOperationFailed(e.getMessage());
+            }
+        }
+    }
+
+    private Category getCategory(String categoryName) {
+        Category category = null;
+        if (database != null) {
+            Cursor cursor = database.rawQuery(String.format(Locale.getDefault(), "%s \"%s\"",
+                    DbConstants.SELECT_CATEGORY_BY_NAME, categoryName), null);
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    category = Category.getCategoryFromCursor(cursor);
+                }
+                cursor.close();
+            }
+        }
+        return category;
+    }
+
     @Override
     public void updateProduct(Product product, OnDatabaseOperationCompleteListener listener) {
         if (database != null) {
-            int result = database.update(DbConstants.PRODUCT_TABLE, Product.getContentValuesFromProduct(product),
+            int result = database.update(DbConstants.PRODUCT_TABLE, Product.getContentValuesFromProduct(product,
+                    product.getCategoryId()),
                     DbConstants.COLUMN_ID + " = " + product.getId(), null);
             if (result == 1) {
                 listener.onDatabaseOperationSucceed("Success");

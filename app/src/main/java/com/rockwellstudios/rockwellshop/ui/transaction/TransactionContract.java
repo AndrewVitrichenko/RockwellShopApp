@@ -2,6 +2,7 @@ package com.rockwellstudios.rockwellshop.ui.transaction;
 
 import com.rockwellstudios.rockwellshop.core.listeners.OnDatabaseOperationCompleteListener;
 import com.rockwellstudios.rockwellshop.model.Customer;
+import com.rockwellstudios.rockwellshop.model.LineItem;
 import com.rockwellstudios.rockwellshop.model.Transaction;
 
 import java.util.List;
@@ -14,6 +15,10 @@ public interface TransactionContract {
 
     interface Model{
         List<Transaction> getAllTransactions();
+
+        List<LineItem> getAllLineItems();
+
+        void saveTransaction(Transaction transaction, OnDatabaseOperationCompleteListener listener);
 
         void updateTransaction(Transaction transaction, OnDatabaseOperationCompleteListener listener);
 

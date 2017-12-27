@@ -49,8 +49,8 @@ public class DbConstants {
     public final static String COLUMN_CATEGORY_ID = "category_id";
 
     //Create constants for column names of RetailerService
-    public final  static String COLUMN_INDUSTRY = "industry";
-    public final  static String COLUMN_CONTACT_PERSON = "manager_name";
+    public final static String COLUMN_INDUSTRY = "industry";
+    public final static String COLUMN_CONTACT_PERSON = "manager_name";
 
     public static final String COLUMN_PURCHASE_PRICE = "purchase_price";
     public static final String COLUMN_PROMO_MESSAGE = "promo_message";
@@ -65,9 +65,29 @@ public class DbConstants {
     public static final String COLUMN_PAYMENT_STATUS = "payment_status";
 
 
+    // SQL queries
+
+    // Product queries
     public static final String SELECT_ALL_PRODUCTS = String.format(Locale.getDefault(),
             "select * from %s", PRODUCT_TABLE);
     public static final String SELECT_ALL_CATEGORIES = String.format(Locale.getDefault(),
             "select * from %s", CATEGORY_TABLE);
+    public static final String SELECT_CATEGORY_BY_NAME = String.format(Locale.getDefault(),
+            "select * from %s where %s.%s =", CATEGORY_TABLE, CATEGORY_TABLE, COLUMN_NAME);
+    public static final String SELECT_PRODUCT_BY_ID = String.format(Locale.getDefault(),
+            "select * from %s where %s.%s =", PRODUCT_TABLE, PRODUCT_TABLE, COLUMN_ID);
+
+    //Customer queries
+    public static final String SELECT_ALL_CUSTOMERS = String.format(Locale.getDefault(),
+            "select * from %s", CUSTOMER_TABLE);
+    public static final String SELECT_CUSTOMER_BY_ID = String.format(Locale.getDefault(),
+            "select * from %s where %s.%s =", CUSTOMER_TABLE, CUSTOMER_TABLE, COLUMN_ID);
+
+    //Transaction queries
+    public static final String SELECT_ALL_TRANSACTIONS = String.format(Locale.getDefault(),
+            "select * from %s", TRANSACTION_TABLE);
+    public static final String SELECT_TRANSACTION_BY_ID = String.format(Locale.getDefault(),
+            "select * from %s where %s.%s =", TRANSACTION_TABLE, TRANSACTION_TABLE, COLUMN_ID);
+
 
 }
